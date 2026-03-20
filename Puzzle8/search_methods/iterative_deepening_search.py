@@ -46,6 +46,7 @@ class IterativeDeepeningSearch(DepthLimitedSearch):
                 self.states_in_the_limit_level += 1
                 if problem.is_goal(state):
                     return Solution(problem, node)
+               
 
             num_successors_size = 0
             if node.depth < self.limit:
