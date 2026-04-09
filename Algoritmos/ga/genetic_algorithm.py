@@ -36,7 +36,18 @@ class GeneticAlgorithm:
 
     # TODO
     def run(self) -> None:
-        pass
+        
+        #t = 0
+        #create_initial_population(P(t))
+        #evaluate(P(t))
+        #while stop condition not met
+        #P’(t) = select(P(t))
+        #P’’(t) = apply_genetic_operators(P’(t))
+        #P(t + 1) = create_next_population(P(t), P’’(t)))
+        #evaluate(P(t + 1))
+        #t = t + 1
+        #return best individual found
+
 
     def __str__(self):
         return "GA: \n" + str(self.population)
