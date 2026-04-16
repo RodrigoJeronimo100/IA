@@ -11,7 +11,18 @@ class KnapsackIndividual(BitVectorIndividual):
 
     # TODO
     def compute_fitness(self) -> float:
-        pass
+        self.weight = 0
+        self.value = 0
+        for i in range(self.num_genes):
+            if self.genome[i]:
+                self.weight += self.problem.knapsack_items[i].weight
+                self.value += self.problem.knapsack_items[i].value
+        if self.weight <= self.problem.maximum_weight:
+            self.fitness = self.value
+        else:
+            self.fitness = 0   
+
+        return self.fitness
 
     def __str__(self):
         string = '\nWeight: ' + f'{self.weight}' + '(Max weight: ' + f'{self.problem.maximum_weight}' + ')'

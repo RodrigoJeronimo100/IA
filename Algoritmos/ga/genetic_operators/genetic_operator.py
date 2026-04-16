@@ -10,4 +10,4 @@ class GeneticOperator(ABC):
 
     @abstractmethod
     def run(self, population: Population) -> None:
-        pass
+        
