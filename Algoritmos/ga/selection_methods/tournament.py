@@ -17,11 +17,13 @@ class Tournament(SelectionMethod):
             new_population.individuals.append(self.tournament(population))
         return new_population
 
-    # TODO
     def tournament(self, population: Population) -> Individual:
-        pass
+        best = population.individuals[GeneticAlgorithm.rand.randrange(population.size)]
 
-    def __str__(self):
-        return "Tournament selection(" + f'{self.tournament_size}' + ")"
+        for i in range(self.tournament_size - 1):
+            contender = population.individuals[GeneticAlgorithm.rand.randrange(population.size)]
 
+            if contender.better_than(best):
+                best = contender
 
+        return copy.deepcopy(best)

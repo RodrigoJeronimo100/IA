@@ -9,18 +9,34 @@ class KnapsackIndividual(BitVectorIndividual):
         self.weight = None
         self.value = None
 
-    # TODO
     def compute_fitness(self) -> float:
         self.weight = 0
         self.value = 0
+
+        # Calculate total weight and value
         for i in range(self.num_genes):
             if self.genome[i]:
-                self.weight += self.problem.knapsack_items[i].weight
                 self.value += self.problem.knapsack_items[i].value
-        if self.weight <= self.problem.maximum_weight:
-            self.fitness = self.value
-        else:
-            self.fitness = 0   
+                self.weight += self.problem.knapsack_items[i].weight
+
+        # Fitness calculation
+        if self.problem.fitness_type == self.problem.SIMPLE_FITNESS:
+            if self.weight <= self.problem.maximum_weight:
+                self.fitness = self.value
+            else:
+                self.fitness = 0
+
+        elif self.problem.fitness_type == self.problem.PENALTY_FITNESS:
+            if self.weight <= self.problem.maximum_weight:
+                self.fitness = self.value
+            else:
+                excess = self.weight - self.problem.maximum_weight
+                penalty_factor = 2  # you can adjust this
+                self.fitness = self.value - penalty_factor * excess
+
+                # Ensure fitness is not negative
+                if self.fitness < 0:
+                    self.fitness = 0
 
         return self.fitness
 
